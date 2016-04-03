@@ -1,8 +1,28 @@
 extends layout
-
+mixin opt(name)
+  option(value=name.toLowerCase().replace(/\s+/g, ''))= name
+mixin lang(name)
+  if (name == "C++")
+    option(value="cpp")= name
+  else
+    option(value=name.toLowerCase().replace(/\s+/g, ''))= name
+    
 block content
   .container
     .row
-      p Welcome to #{title}
+      //p Welcome to #{title}
+      .col-sm-6.text-center.form-inline
+        label.title Language
+        select.form-control#languageSelect(style='width: inherit;')
+          each val in ["C++", "CSS", "C", "Javascript", "Apache Conf", "Ruby", "Coffeescript", "Erlang", "Git", "Go", "Handlebars", "Jade", "Java", "JSON", "Latex", "Less", "LOLCode", "Lua", "Makefile", "Nginx", "Perl", "PHP", "Python", "JSX", "Rust", "SASS", "SCSS", "SQL"].sort()
+            +lang(val)
+      .col-sm-6.text-center.form-inline
+        label.title Theme
+        select.form-control#themeSelect(style='width: inherit;')
+          +opt('Default')
+          +opt('Funky')
+          +opt('Okaidia')
+          +opt('Solarized Light')
+          +opt('Tomorrow')
     .row
-      #js-wrapper(data-language="javascript") var foo="foo";
+      #code-wrapper
