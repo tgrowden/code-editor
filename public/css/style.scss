@@ -8,6 +8,12 @@ body {
   height: 250px;
   position: relative;
 }
+.CodeFlask__pre {
+  //background: rgba(0, 0, 0, 1)!important;
+}
+.CodeFlask__textarea {
+  z-index: 10;
+}
 a {
   color: #00B7FF;
 }
