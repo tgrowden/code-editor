@@ -1,4 +1,6 @@
 $(function() {
   var flask = new CodeFlask;
-  flask.run('#my-code-wrapper', { language: 'javascript' });
+  flask.run('#js-wrapper', {
+    language: 'javascript'
+  });
 });
