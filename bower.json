@@ -5,5 +5,10 @@
     "**/.*",
     "node_modules",
     "components"
-  ]
+  ],
+  "dependencies": {
+    "codeflask.js": "codeflask#^0.1.1",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.2"
+  }
 }
