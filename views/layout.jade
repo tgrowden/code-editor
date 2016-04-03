@@ -6,8 +6,30 @@ html(lang='en')
     title= title
     block css
       link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/components/prism/prism.css')
+      link(rel='stylesheet', href='/components/codeflask.js/src/codeflask.css')
+      link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
     block js
+      script(src='/components/jquery/dist/jquery.min.js')
+      script(src='/components/dist/js/bootstrap.min.js')
+      script(src='/components/prism/prism.js')
+      script(src='/components/codeflask.js/src/codeflask.js')
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
   body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      a.navbar-brand(href='/') Live Code Editor
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='https://github.com/tgrowden/code-editor', target='_blank', title='Check out this project on Github')
+                i.fa.fa-github-alt.fa-2x
     block content
