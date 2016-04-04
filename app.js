@@ -6,7 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/user');
+var redis = require('redis');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
@@ -52,4 +55,17 @@ app.use(function(err, req, res, next) {
     title: 'error'
   });
 });
-module.exports = app;
+//
+// websocket stuff =============================================================================
+//
+io.on('connection', function(socket) {
+  socket.emit('connection', { connection: 'established' });
+  socket.on('code-update', function(data) {
+    io.emit('code-update', data);
+  });
+});
+
+// end websocket =============================================================================
+
+console.log(' Listening on Port 3000');
+server.listen(3000);
