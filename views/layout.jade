@@ -6,20 +6,17 @@ html(lang='en')
     title= title
     block css
       link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap.min.css')
-      link(rel='stylesheet', href='/css/codeflask.css')
+      link(rel='stylesheet', href='/components/codemirror/lib/codemirror.css')
       link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
+      link(rel='stylesheet', href='/css/style.css')
     block js
       script(src='/components/jquery/dist/jquery.min.js')
       script(src='/components/bootstrap/dist/js/bootstrap.min.js')
-      script(src='/components/prism/prism.js')
-      script(src='/components/codeflask.js/src/codeflask.js')
+      script(src='/components/codemirror/lib/codemirror.js')
       script(src='/js/main.js')
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
   body
-    #prism-css
-      link(rel='stylesheet', href='/css/themes/prism.css')
-    link(rel='stylesheet', href='/css/style.css')
     nav.navbar.navbar-inverse.navbar-fixed-top
       a.navbar-brand(href='/') #{title}
       .container

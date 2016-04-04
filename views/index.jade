@@ -2,8 +2,8 @@ extends layout
 mixin opt(name)
   option(value=name.toLowerCase().replace(/\s+/g, ''))= name
 mixin lang(name)
-  if (name == "C++")
-    option(value="cpp")= name
+  if (name == "C++" || name == "C" || name == "C#")
+    option(value="clike")= name
   else
     option(value=name.toLowerCase().replace(/\s+/g, ''))= name
     
@@ -14,7 +14,7 @@ block content
       .col-sm-6.text-center.form-inline
         label.title Language
         select.form-control#languageSelect(style='width: inherit;')
-          each val in ["C++", "CSS", "C", "Javascript", "Apache Conf", "Ruby", "Coffeescript", "Erlang", "Git", "Go", "Handlebars", "Jade", "Java", "JSON", "Latex", "Less", "LOLCode", "Lua", "Makefile", "Nginx", "Perl", "PHP", "Python", "JSX", "Rust", "SASS", "SCSS", "SQL"].sort()
+          each val in ["APL", "ASN.1", "Asterisk", "Brainfuck", "C", "C++", "C#", "Clojure", "CMake", "COBOL", "CoffeeScript", "Common Lisp", "Crystal", "CSS", "Cypher", "D", "Dart", "Django", "Dockerfile", "DTD", "Dylan", "EBNF", "ECL", "Eiffel", "Elm", "Erlang", "Factor", "FCL", "Forth", "Fortran", "Gas", "Gherkin", "Go", "Groovy", "HAML", "Handlebars", "Haskell", "Haskell-Literate", "Haxe", "HTML embedded", "HTML mixed", "HTTP", "IDL", "Jade", "JavaScript", "Jinja2", "JSX", "Julia", "LiveScript", "Lua", "Markdown", "Mathematica", "mIRC", "Modelica", "MscGen", "MUMPS", "Nginx", "NSIS", "NTriples", "Octave", "Oz", "Pascal", "PEGjs", "Perl", "PHP", "ProtoBuf", "Puppet", "Python", "Q", "R", "RPM", "RST", "Ruby", "Rust", "Sass", "Scheme", "Shell", "Sieve", "Slim", "Smalltalk", "Smarty", "Solr", "Soy", "Spreadsheet", "SQL", "Stylus", "Swift", "Tcl", "Textile", "Tiddlywiki", "TOML", "Tornado", "troff", "TTCN", "Turtle", "Twig", "VB", "VBScript", "Velocity", "Verilog", "VHDL", "Vue", "XML", "XQuery", "YAML", "YAML-frontmatter", "Z80"].sort()
             +lang(val)
       .col-sm-6.text-center.form-inline
         label.title Theme
@@ -25,4 +25,4 @@ block content
           +opt('Solarized Light')
           +opt('Tomorrow')
     .row
-      #code-wrapper
+      textarea#code
