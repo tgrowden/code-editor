@@ -10,6 +10,7 @@
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.2",
     "font-awesome": "^4.5.0",
-    "codemirror": "^5.13.2"
+    "codemirror": "^5.13.2",
+    "requirejs": "^2.2.0"
   }
 }

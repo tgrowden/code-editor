@@ -26,3 +26,9 @@ block content
           +opt('Tomorrow')
     .row
       textarea#code
+  script.
+    function setLang(lang) {
+    $('#lang script').prop("src", '/components/codemirror/mode/' + lang + '/' + lang + '.js');
+    var editor = CodeMirror.fromTextArea(document.getElementById('code'), {lineNumbers: true, language: 'javascript'});
+    }
+    setLang('javascript')
