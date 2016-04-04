@@ -11,7 +11,7 @@ $(function() {
   };
   window.setLang('javascript');
 // Web Sockets
-  var socket = io.connect('http://localhost:3000');
+  var socket = io();
   socket.on('connection', function (data) {
     console.log(data);
   });
@@ -24,10 +24,8 @@ $(function() {
     });
   });
   socket.on('code-update', function(data){
-    if (data.uid !== uid) {
-      while (data.code !== editor.getValue()) {
-        editor.setValue(data.code);
-      }
+    if (data.uid !== uid && data.code !== editor.getValue()) {
+      editor.setValue(data.code);
     }
   });
 
