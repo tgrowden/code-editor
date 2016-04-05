@@ -24,6 +24,14 @@ a {
 label.title {
   padding: 15px;
 }
+li.codeOptions {
+  padding: 3px 20px;
+  cursor: pointer;
+}
+li.codeOptions:hover {
+  color: #262626;
+  background-color: #f5f5f5;
+}
 /*
 .token.tab:not(:empty):before, .token.cr:before, .token.lf:before, .token.space:before {
   color: hsl(0, 20%, 0%);

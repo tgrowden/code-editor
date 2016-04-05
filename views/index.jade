@@ -21,5 +21,15 @@ block content
         select.form-control#themeSelect(style='width: inherit;')
           each val in ["Default", "3024 Day", "3024 Night", "ABCDEF", "Ambiance Mobile", "Ambiance", "Base16 Dark", "Base16 Light", "Bespin", "Blackboard", "Cobalt", "Colorforth", "Dracula", "Eclipse", "Elegant", "Erlang Dark", "Hopscotch", "Icecoder", "Isotope", "Lesser Dark", "Liquibyte", "Material", "MBO", "MDN Like", "Midnight", "Monokai", "Neat", "Neo", "Night", "Paraiso Dark", "Paraiso Light", "Pastel on Dark", "Railscasts", "Rubyblue", "Seti", "Solarized", "The Matrix", "Tomorrow Night Bright", "Tomorrow Night Eighties", "TTCN", "Twilight", "Vibrant Ink", "XQ dark", "XQ light", "Yeti", "Zenburn"]
             +theme(val)
+      .col-sm-12
+        .dropdown
+          button#codeOptions.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+            | Editor Options 
+            span.caret
+          ul.dropdown-menu(aria-labelledby='codeOptions')
+            li.codeOptions(data-type='boolean', data-value='lineWrapping') Word Wrap
+            li.divider(role='separator')
+            li
+              a(href='#') Separated link
     .row
       textarea#code
