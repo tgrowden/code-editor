@@ -45,8 +45,8 @@ $(function() {
   socket.on('connection', function(data) {
     console.log(data);
   });
-  editor.on("changes", function(change) {
-    //console.log("change=", change);
+  editor.on("change", function(instance, change) {
+    console.log("change=", change.from, "\n", change.text);
     var code = editor.getValue();
     socket.emit('code-update', {
       uid: uid,
