@@ -4,14 +4,24 @@ $(function() {
     lineNumbers: true,
     tabSize: 2
   });
-  window.editor = editor;
   var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
-    window.editor.setOption("mode", lang);
+    editor.setOption("mode", lang);
+  };
+  var setTheme = function(theme) {
+    if (theme == "default"){
+      $('#theme').empty();
+    } else {
+      $('#theme').html('<link rel="stylesheet" href="/components/codemirror/theme/' + theme + '.css" />');
+    }
+    editor.setOption("theme", theme);
   };
   setLang('javascript');
   $('#languageSelect').change(function() {
     setLang($(this).val());
+  });
+  $('#themeSelect').change(function() {
+    setTheme($(this).val());
   });
   // Web Sockets
   var socket = io();
