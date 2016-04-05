@@ -2,7 +2,8 @@ var uid = Date.now();
 $(function() {
   var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     lineNumbers: true,
-    tabSize: 2
+    tabSize: 2,
+    language: 'markdown'
   });
   window.editor = editor;
   var setLang = function(lang) {
@@ -17,7 +18,6 @@ $(function() {
     }
     editor.setOption("theme", theme);
   };
-  setLang('javascript');
   $('#languageSelect').change(function() {
     setLang($(this).val());
   });
