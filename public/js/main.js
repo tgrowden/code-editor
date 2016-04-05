@@ -5,14 +5,17 @@ $(function() {
     tabSize: 2
   });
   window.editor = editor;
-  window.setLang = function(lang) {
+  var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
     window.editor.setOption("mode", lang);
   };
-  window.setLang('javascript');
-// Web Sockets
+  setLang('javascript');
+  $('#languageSelect').change(function() {
+    setLang($(this).val());
+  });
+  // Web Sockets
   var socket = io();
-  socket.on('connection', function (data) {
+  socket.on('connection', function(data) {
     console.log(data);
   });
   editor.on("changes", function(change) {
@@ -23,10 +26,9 @@ $(function() {
       code: code
     });
   });
-  socket.on('code-update', function(data){
+  socket.on('code-update', function(data) {
     if (data.uid !== uid && data.code !== editor.getValue()) {
       editor.setValue(data.code);
     }
   });
-
 });
