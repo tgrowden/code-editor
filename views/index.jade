@@ -1,6 +1,6 @@
 extends layout
-mixin opt(name)
-  option(value=name.toLowerCase().replace(/\s+/g, ''))= name
+mixin theme(name)
+  option(value=name.toLowerCase().replace(/\s+/g, '-'))= name
 mixin lang(name)
   if (name == "C++" || name == "C" || name == "C#")
     option(value="clike")= name
@@ -19,10 +19,7 @@ block content
       .col-sm-6.text-center.form-inline
         label.title Theme
         select.form-control#themeSelect(style='width: inherit;')
-          +opt('Default')
-          +opt('Funky')
-          +opt('Okaidia')
-          +opt('Solarized Light')
-          +opt('Tomorrow')
+          each val in ["Default", "3024 Day", "3024 Night", "ABCDEF", "Ambiance Mobile", "Ambiance", "Base16 Dark", "Base16 Light", "Bespin", "Blackboard", "Cobalt", "Colorforth", "Dracula", "Eclipse", "Elegant", "Erlang Dark", "Hopscotch", "Icecoder", "Isotope", "Lesser Dark", "Liquibyte", "Material", "MBO", "MDN Like", "Midnight", "Monokai", "Neat", "Neo", "Night", "Paraiso Dark", "Paraiso Light", "Pastel on Dark", "Railscasts", "Rubyblue", "Seti", "Solarized", "The Matrix", "Tomorrow Night Bright", "Tomorrow Night Eighties", "TTCN", "Twilight", "Vibrant Ink", "XQ dark", "XQ light", "Yeti", "Zenburn"]
+            +theme(val)
     .row
       textarea#code
