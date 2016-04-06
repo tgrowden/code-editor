@@ -1,11 +1,11 @@
 var uid = Date.now();
 $(function() {
-  var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+  window.editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     lineNumbers: true,
     tabSize: 2,
     language: 'markdown'
   });
-  window.editor = editor;
+  var editor = window.editor;
   var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
     editor.setOption("mode", lang);
@@ -44,15 +44,20 @@ $(function() {
   var socket = io();
   socket.on('connection', function(data) {
     console.log(data);
+    //@TODO create 'updateRequired' handling for sending existing data to newly connected user
   });
   editor.on("change", function(instance, change) {
-    //console.log(JSON.stringify(change));
-    socket.emit('code-update', {
-      uid: uid,
-      change: change
-    });
+    if (change.origin != "setValue") {
+      socket.emit('code-update', {
+        uid: uid,
+        change: change,
+        code: editor.getValue()
+      });
+    }
   });
   socket.on('code-update', function(data) {
-    console.log(JSON.stringify(data.change));
+    if (data.uid != uid) {
+      editor.setValue(data.code);
+    }
   });
 });
