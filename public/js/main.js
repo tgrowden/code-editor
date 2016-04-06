@@ -57,7 +57,9 @@ $(function() {
   });
   socket.on('code-update', function(data) {
     if (data.uid != uid) {
+      var cursor = editor.getCursor();
       editor.setValue(data.code);
+      editor.setCursor(cursor.line, cursor.ch);
     }
   });
 });
