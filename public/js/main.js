@@ -46,16 +46,13 @@ $(function() {
     console.log(data);
   });
   editor.on("change", function(instance, change) {
-    console.log("change=", change.from, "\n", change.text);
-    var code = editor.getValue();
+    //console.log(JSON.stringify(change));
     socket.emit('code-update', {
       uid: uid,
-      code: code
+      change: change
     });
   });
   socket.on('code-update', function(data) {
-    if (data.uid !== uid && data.code !== editor.getValue()) {
-      editor.setValue(data.code);
-    }
+    console.log(JSON.stringify(data.change));
   });
 });
