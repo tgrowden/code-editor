@@ -9,6 +9,11 @@ $(function() {
   var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
     editor.setOption("mode", lang);
+    if (lang == 'markdown') {
+      $('#md-code').show();
+    } else {
+      $('#md-code').hide();
+    }
   };
   var setTheme = function(theme) {
     if (theme == "default"){
@@ -47,6 +52,7 @@ $(function() {
     //@TODO create 'updateRequired' handling for sending existing data to newly connected user
   });
   editor.on("change", function(instance, change) {
+    $('#md-code').html((marked(editor.getValue())));
     if (change.origin != "setValue") {
       socket.emit('code-update', {
         uid: uid,
