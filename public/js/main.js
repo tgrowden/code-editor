@@ -12,6 +12,7 @@ $(function() {
     tabSize: 2,
     language: 'markdown'
   });
+  $('.cm-s-default').wrap('<div class="col-sm-6"></div>');
   var editor = window.editor;
   var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
@@ -23,8 +24,10 @@ $(function() {
     }
     if (lang == 'markdown') {
       $('#md-code').show();
+      $('.cm-s-default').wrap('<div class="col-sm-6"></div>');
     } else {
       $('#md-code').hide();
+      $('.cm-s-default').unwrap('<div class="col-sm-6"></div>');
     }
   };
   var setTheme = function(theme) {
@@ -63,6 +66,7 @@ $(function() {
       var opt = $(this).attr('data-value');
       toggleOption(opt);
     }
+    return false;
   });
   //end option handling =========================
   // Web Sockets

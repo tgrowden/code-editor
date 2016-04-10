@@ -24,11 +24,11 @@ block content
             | Editor Options 
             span.caret
           ul.dropdown-menu(aria-labelledby='codeOptions')
-            li.codeOptions(data-type='boolean', data-value='lineWrapping') Word Wrap
+            li.codeOptions(data-type='boolean', data-value='lineWrapping')
+              a(href='#') Word Wrap
             li.divider(role='separator')
             li
               a(href='#') Separated link
-    .row
+    .row.code-row
       textarea#code
-    .row
-      div.well#md-code
+      div.col-sm-6#md-code
