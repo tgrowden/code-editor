@@ -2,10 +2,7 @@ extends layout
 mixin theme(name)
   option(value=name.toLowerCase().replace(/\s+/g, '-'))= name
 mixin lang(name)
-  if (name == "C++" || name == "C" || name == "C#")
-    option(value="clike")= name
-  else
-    option(value=name.toLowerCase().replace(/\s+/g, ''))= name
+  option(value=name.toLowerCase().replace(/\s+/g, ''))= name
     
 block content
   .container

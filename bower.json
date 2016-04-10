@@ -12,6 +12,7 @@
     "font-awesome": "^4.5.0",
     "codemirror": "^5.13.2",
     "requirejs": "^2.2.0",
-    "marked": "^0.3.5"
+    "marked": "^0.3.5",
+    "remarkable-bootstrap-notify": "^3.1.3"
   }
 }

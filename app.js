@@ -65,6 +65,9 @@ io.on('connection', function(socket) {
   socket.on('changeLanguage', function(data) {
     io.emit('changeLanguage', data);
   });
+  socket.on('new-user', function(data) {
+    io.emit('new-user', data);
+  });
 });
 
 // end websocket =============================================================================

@@ -1,4 +1,11 @@
 var uid = Date.now();
+function Notify(msg, type) {
+  $.notify({
+    message: msg
+  }, {
+    type: type
+  });
+}
 $(function() {
   window.editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     lineNumbers: true,
@@ -8,7 +15,12 @@ $(function() {
   var editor = window.editor;
   var setLang = function(lang) {
     $('#lang').html('<script src="/components/codemirror/mode/' + lang + '/' + lang + '.js"></script>');
-    editor.setOption("mode", lang);
+    //handling for c-like languages
+    if (lang == "c++" || name == "c" || name == "c#") {
+      editor.setOption("mode", "clike");
+    } else {
+      editor.setOption("mode", lang);
+    }
     if (lang == 'markdown') {
       $('#md-code').show();
     } else {
@@ -16,7 +28,7 @@ $(function() {
     }
   };
   var setTheme = function(theme) {
-    if (theme == "default"){
+    if (theme == "default") {
       $('#theme').empty();
     } else {
       $('#theme').html('<link rel="stylesheet" href="/components/codemirror/theme/' + theme + '.css" />');
@@ -53,11 +65,12 @@ $(function() {
     }
   });
   //end option handling =========================
-
   // Web Sockets
   var socket = io();
   socket.on('connection', function(data) {
-    console.log(data);
+    //send data that new user has connected
+    socket.emit('new-user', uid);
+
     //@TODO create 'updateRequired' handling for sending existing data to newly connected user
   });
   editor.on("change", function(instance, change) {
@@ -70,6 +83,12 @@ $(function() {
       });
     }
   });
+  //handle notifications of new user
+  socket.on('new-user', function(data) {
+    if (data != uid) {
+      Notify("A new user has connected", "success");
+    }
+  });
   socket.on('code-update', function(data) {
     if (data.uid != uid) {
       editor.setValue(data.code);
@@ -77,11 +96,20 @@ $(function() {
     }
   });
   socket.on('changeLanguage', function(data) {
+    var getName = function(user) {
+      if (user == uid) {
+        return "You";
+      } else {
+        return "Someone else";
+      }
+    };
     if (data.uid != uid) {
       $('#languageSelect').val(data.language);
       console.log(data.uid + " updated language to " + data.language);
     }
+    Notify(getName(data.uid) + " updated language to <strong>" + $('#languageSelect option:selected').text() + "</strong>", "success");
   });
+
   function getCodeData() {
     var data = {
       code: editor.getValue(),
