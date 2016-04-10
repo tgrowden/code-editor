@@ -24,11 +24,19 @@ $(function() {
     editor.setOption("theme", theme);
   };
   $('#languageSelect').change(function() {
-    setLang($(this).val());
+    var lang = $(this).val();
+    setLang(lang);
+    var data = {
+      language: lang,
+      uid: uid
+    };
+    socket.emit('changeLanguage', data);
   });
   $('#themeSelect').change(function() {
-    setTheme($(this).val());
+    var theme = $(this).val();
+    setTheme(theme);
   });
+  var cursor;
   // handle changing Options ====================
   var toggleOption = function(opt) {
     if (editor.getOption(opt) === true) {
@@ -45,6 +53,7 @@ $(function() {
     }
   });
   //end option handling =========================
+
   // Web Sockets
   var socket = io();
   socket.on('connection', function(data) {
@@ -63,9 +72,26 @@ $(function() {
   });
   socket.on('code-update', function(data) {
     if (data.uid != uid) {
-      var cursor = editor.getCursor();
       editor.setValue(data.code);
       editor.setCursor(cursor.line, cursor.ch);
     }
+  });
+  socket.on('changeLanguage', function(data) {
+    if (data.uid != uid) {
+      $('#languageSelect').val(data.language);
+      console.log(data.uid + " updated language to " + data.language);
+    }
+  });
+  function getCodeData() {
+    var data = {
+      code: editor.getValue(),
+      language: $('#languageSelect').val(),
+      uid: uid
+    };
+    return data;
+  }
+  editor.on("beforeChange", function() {
+    cursor = editor.getCursor();
+    console.log("this is before change");
   });
 });
